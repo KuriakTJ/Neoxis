@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Neoxis Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+  :root {
+    --primary: #0a2463;
+    --accent: #e84855;
+    --accent2: #f5a623;
+    --light-bg: #f4f7fc;
+    --white: #ffffff;
+    --text: #333344;
+    --muted: #6b7280;
+    --nav-h: 75px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--primary);
+    color: #aac4ff;
+    font-size: 0.78rem;
+    padding: 7px 0;
+  }
+  .topbar .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .topbar a { color: #aac4ff; text-decoration: none; margin-left: 16px; }
+  .topbar a:hover { color: var(--accent2); }
+  .topbar .socials a { margin-left: 10px; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--white);
+    box-shadow: 0 2px 18px rgba(10,36,99,.12);
+    height: var(--nav-h);
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 1px;
+  }
+  .logo img {
+    display: block;
+    max-height: 56px;
+    width: auto;
+  }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.92rem;
+    color: var(--text);
+    position: relative;
+    padding-bottom: 4px;
+    transition: color .25s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--accent);
+    transition: width .3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    background: var(--accent);
+    color: #fff !important;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-weight: 600 !important;
+    transition: background .25s, transform .2s !important;
+  }
+  .nav-cta:hover { background: #c73040 !important; transform: translateY(-1px); }
+  .nav-cta::after { display: none !important; }
+
+  /* ── HERO SLIDER ── */
+  .hero {
+    position: relative;
+    height: calc(100vh - var(--nav-h));
+    min-height: 520px;
+    overflow: hidden;
+    padding: 0;
+  }
+  .slides { display: flex; height: 100%; transition: transform .7s cubic-bezier(.77,0,.175,1); }
+  .slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .slide-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.06);
+    transition: transform 8s linear;
+  }
+  .slide.active .slide-bg { transform: scale(1); }
+  .slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, rgba(10,36,99,.82) 40%, rgba(10,36,99,.35) 100%);
+  }
+  .slide-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .6s .4s, transform .6s .4s;
+  }
+  .slide.active .slide-content { opacity: 1; transform: translateY(0); }
+  .slide-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 14px;
+  }
+  .slide-content h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 18px;
+  }
+  .slide-content p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,.82);
+    max-width: 520px;
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+  .btn-group { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.92rem;
+    transition: background .25s, transform .2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #c73040; transform: translateY(-2px); }
+  .btn-outline {
+    border: 2px solid rgba(255,255,255,.6);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.92rem;
+    transition: border-color .25s, background .25s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+
+  /* slider dots */
+  .slider-dots {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+  }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.4);
+    cursor: pointer;
+    transition: background .3s, transform .3s;
+  }
+  .dot.active { background: var(--accent2); transform: scale(1.3); }
+
+  /* slider arrows */
+  .arrow {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3);
+    color: #fff;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    transition: background .25s;
+    backdrop-filter: blur(4px);
+  }
+  .arrow:hover { background: var(--accent); }
+  .arrow.prev { left: 24px; }
+  .arrow.next { right: 24px; }
+
+  /* ── STATS BAR ── */
+  .stats {
+    background: var(--primary);
+    color: #fff;
+    padding: 24px 0;
+  }
+  .stats-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    text-align: center;
+  }
+  .stat-item { border-right: 1px solid rgba(255,255,255,.15); padding: 8px 0; }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--accent2);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.8rem; color: rgba(255,255,255,.7); margin-top: 4px; }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 90px 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .section-tag {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.7rem);
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 0.97rem;
+    color: var(--muted);
+    max-width: 580px;
+    line-height: 1.75;
+  }
+  .centered { text-align: center; }
+  .centered .section-sub { margin: 0 auto 48px; }
+
+  /* ── ABOUT ── */
+  .about { background: var(--light-bg); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+  .about-visual {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .about-graphic {
+    width: 100%;
+    height: 380px;
+    background: linear-gradient(135deg, var(--primary) 0%, #1a4ba8 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-graphic::before {
+    content: '';
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 40px solid rgba(255,255,255,.06);
+    top: -60px; right: -60px;
+  }
+  .about-graphic::after {
+    content: '';
+    position: absolute;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 30px solid rgba(255,255,255,.06);
+    bottom: -40px; left: -40px;
+  }
+  .about-icon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 32px;
+    position: relative;
+    z-index: 1;
+  }
+  .aig-item {
+    background: rgba(255,255,255,.1);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,.15);
+  }
+  .aig-item i { font-size: 2rem; color: var(--accent2); margin-bottom: 8px; display: block; }
+  .aig-item span { font-size: 0.78rem; color: rgba(255,255,255,.85); font-weight: 500; }
+  .badge-est {
+    position: absolute;
+    bottom: -16px; right: 24px;
+    background: var(--accent);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .about-text .section-tag { margin-top: 0; }
+  .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 18px; font-size: 0.95rem; }
+  .about-feats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 24px 0 32px;
+  }
+  .feat-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .feat-item i { color: var(--accent); font-size: 0.85rem; }
+
+  /* ── SERVICES ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 52px;
+  }
+  .svc-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 36px 28px;
+    border: 1px solid #e5eaf5;
+    transition: transform .3s, box-shadow .3s, border-color .3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .svc-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .35s;
+  }
+  .svc-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(10,36,99,.12); border-color: transparent; }
+  .svc-card:hover::before { transform: scaleX(1); }
+  .svc-icon {
+    width: 60px; height: 60px;
+    background: linear-gradient(135deg, #e8edfa 0%, #d0daff 100%);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: 22px;
+    transition: background .3s;
+  }
+  .svc-card:hover .svc-icon { background: linear-gradient(135deg, var(--primary) 0%, #1a4ba8 100%); color: #fff; }
+  .svc-card h3 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .svc-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
+  .svc-list { list-style: none; }
+  .svc-list li {
+    font-size: 0.83rem;
+    color: var(--muted);
+    padding: 5px 0;
+    border-bottom: 1px dashed #e5eaf5;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .svc-list li:last-child { border-bottom: none; }
+  .svc-list li::before { content: '→'; color: var(--accent); font-size: 0.75rem; }
+  .svc-more { text-align: center; margin-top: 44px; }
+
+  /* ── EXPERTISE / MODULES ── */
+  .expertise { background: var(--light-bg); }
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 52px;
+  }
+  .exp-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 32px;
+    border: 1px solid #e5eaf5;
+  }
+  .exp-card h3 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent);
+    display: inline-block;
+  }
+  .exp-list { list-style: none; }
+  .exp-list li {
+    font-size: 0.88rem;
+    color: var(--muted);
+    padding: 9px 0;
+    border-bottom: 1px solid #f0f3fa;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color .2s;
+  }
+  .exp-list li:last-child { border-bottom: none; }
+  .exp-list li:hover { color: var(--primary); }
+  .exp-list li i { color: var(--accent); font-size: 0.7rem; width: 16px; }
+
+  /* ── CTA BAND ── */
+  .cta-band {
+    background: linear-gradient(110deg, var(--primary) 0%, #0d3580 100%);
+    padding: 72px 0;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-band::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    border: 80px solid rgba(255,255,255,.04);
+    top: -200px; right: -100px;
+  }
+  .cta-band h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .cta-band p { color: rgba(255,255,255,.75); margin-bottom: 32px; max-width: 520px; margin-left: auto; margin-right: auto; }
+
+ /* ── CLIENTS MARQUEE ── */
+.clients {
+  background: var(--white);
+  padding: 72px 0;
+}
+
+.marquee-wrap {
+  overflow: hidden;
+  position: relative;
+  margin-top: 40px;
+}
+
+.marquee-wrap::before,
+.marquee-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+}
+
+.marquee-wrap::before {
+  left: 0;
+  background: linear-gradient(to right, #fff, transparent);
+}
+
+.marquee-wrap::after {
+  right: 0;
+  background: linear-gradient(to left, #fff, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 32px;
+  animation: marquee 22s linear infinite;
+  width: max-content;
+  align-items: center;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.client-logo {
+  background: var(--light-bg);
+  border-radius: 10px;
+  width: 180px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid #e5eaf5;
+  padding: 14px;
+  transition: transform 0.3s ease;
+}
+
+.client-logo:hover {
+  transform: translateY(-4px);
+}
+
+.client-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.client-logo:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+  /* ── FOOTER ── */
+  footer {
+    background: #07193d;
+    color: rgba(255,255,255,.7);
+    padding: 72px 0 0;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 48px;
+    padding-bottom: 56px;
+  }
+  .footer-brand .logo { color: #fff; display: inline-block; margin-bottom: 16px; }
+  .footer-brand .logo span { color: var(--accent2); }
+  .footer-brand p { font-size: 0.88rem; line-height: 1.75; color: rgba(255,255,255,.55); }
+  .footer-socials { display: flex; gap: 10px; margin-top: 20px; }
+  .footer-socials a {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.12);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,.7);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: background .25s, color .25s;
+  }
+  .footer-socials a:hover { background: var(--accent); color: #fff; }
+  .footer-col h4 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a {
+    color: rgba(255,255,255,.55);
+    text-decoration: none;
+    font-size: 0.87rem;
+    transition: color .25s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer-links a::before { content: '›'; color: var(--accent); }
+  .footer-links a:hover { color: var(--accent2); }
+  .contact-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 0.87rem;
+    color: rgba(255,255,255,.55);
+    align-items: flex-start;
+  }
+  .contact-item i { color: var(--accent2); margin-top: 2px; flex-shrink: 0; }
+  .newsletter input {
+    width: 100%;
+    padding: 11px 14px;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 4px;
+    color: #fff;
+    font-size: 0.87rem;
+    margin-bottom: 10px;
+    outline: none;
+  }
+  .newsletter input::placeholder { color: rgba(255,255,255,.35); }
+  .newsletter button {
+    width: 100%;
+    padding: 11px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: background .25s;
+  }
+  .newsletter button:hover { background: #c73040; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.07);
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,.35);
+  }
+
+  /* ── SCROLL-TO-TOP ── */
+  #stt {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    width: 44px; height: 44px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0 4px 16px rgba(232,72,85,.4);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .3s, transform .3s;
+    z-index: 999;
+    text-decoration: none;
+  }
+  #stt.show { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .about-grid, .expertise-grid, .footer-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .stat-item:nth-child(2) { border-right: none; }
+  }
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .slide-content { padding: 0 24px; }
+    .stats-inner { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="inner">
+    <span><i class="fa fa-envelope" style="margin-right:6px"></i>info@neoxissolutions.com &nbsp;|&nbsp; <i class="fa fa-phone" style="margin-right:6px"></i>+91-7994195240</span>
+    <div class="socials">
+      Follow us:
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo"><img src="src/images/logo2.png" alt="Neoxis logo"></a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#expertise">Solutions</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+      <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="slides" id="slides">
+    <!-- Slide 1 -->
+    <div class="slide active">
+      <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1600&q=80')"></div>
+      <div class="slide-content container">
+        <p class="slide-tag">Communicate · Collaborate · Create</p>
+        <h1>Streamline Your<br>Projects with Neoxis</h1>
+        <p>Speed, security, and scalability — everything your business needs to thrive in the digital era. We build software that works for you.</p>
+        <div class="btn-group">
+          <a href="#services" class="btn-primary">Explore Services</a>
+          <a href="#contact" class="btn-outline">Get a Call Back</a>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 2 -->
+    <div class="slide">
+      <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=1600&q=80')"></div>
+      <div class="slide-content container">
+        <p class="slide-tag">Mobile App Development</p>
+        <h1>Android &amp; iOS Apps<br>Built to Perform</h1>
+        <p>We craft cutting-edge mobile applications that delight users and drive business growth on both Android and iOS platforms.</p>
+        <div class="btn-group">
+          <a href="#services" class="btn-primary">Learn More</a>
+          <a href="#contact" class="btn-outline">Get a Call Back</a>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 3 -->
+    <div class="slide">
+      <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1600&q=80')"></div>
+      <div class="slide-content container">
+        <p class="slide-tag">Custom Software Development</p>
+        <h1>Tailored Solutions<br>For Your Unique Needs</h1>
+        <p>From simplicity to complexity, our expert team crafts custom software with precision, improved security, and seamless third-party integrations.</p>
+        <div class="btn-group">
+          <a href="#services" class="btn-primary">Our Solutions</a>
+          <a href="#contact" class="btn-outline">Get a Call Back</a>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 4 -->
+    <div class="slide">
+      <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=80')"></div>
+      <div class="slide-content container">
+        <p class="slide-tag">SaaS Application Development</p>
+        <h1>Cloud-Powered<br>SaaS Solutions</h1>
+        <p>Leverage our cloud expertise for minimal infrastructure complexity, improved scalability, and reduced operational costs across all business endpoints.</p>
+        <div class="btn-group">
+          <a href="#services" class="btn-primary">Discover More</a>
+          <a href="#contact" class="btn-outline">Get a Call Back</a>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 5 -->
+    <div class="slide">
+      <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=80')"></div>
+      <div class="slide-content container">
+        <p class="slide-tag">Analytics & Insights</p>
+        <h1>Data-Driven<br>Decisions</h1>
+        <p>Unlock actionable business intelligence with tailored dashboards, reporting systems, and predictive analytics built to scale.</p>
+        <div class="btn-group">
+          <a href="#services" class="btn-primary">See Insights</a>
+          <a href="#contact" class="btn-outline">Schedule a Demo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="arrow prev" onclick="changeSlide(-1)"><i class="fa fa-chevron-left"></i></button>
+  <button class="arrow next" onclick="changeSlide(1)"><i class="fa fa-chevron-right"></i></button>
+  <div class="slider-dots" id="dots">
+    <div class="dot active" onclick="goSlide(0)"></div>
+    <div class="dot" onclick="goSlide(1)"></div>
+    <div class="dot" onclick="goSlide(2)"></div>
+    <div class="dot" onclick="goSlide(3)"></div>
+    <div class="dot" onclick="goSlide(4)"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-num">6+</div><div class="stat-label">Years in Business</div></div>
+    <div class="stat-item"><div class="stat-num">80+</div><div class="stat-label">Projects Delivered</div></div>
+    <div class="stat-item"><div class="stat-num">50+</div><div class="stat-label">Happy Clients</div></div>
+    <div class="stat-item"><div class="stat-num">20+</div><div class="stat-label">Expert Developers</div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-graphic">
+          <div class="about-icon-grid">
+            <div class="aig-item"><i class="fa fa-mobile-alt"></i><span>Mobile Apps</span></div>
+            <div class="aig-item"><i class="fa fa-cloud"></i><span>SaaS Cloud</span></div>
+            <div class="aig-item"><i class="fa fa-code"></i><span>Custom Dev</span></div>
+            <div class="aig-item"><i class="fa fa-headset"></i><span>24/7 Support</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="section-tag">Who We Are</p>
+        <h2 class="section-title">Innovative Business Solutions Under One Roof</h2>
+        <p>Established in 2018, Neoxis Solutions has been recognized as an innovative business solution provider for the corporate sector. Our ultimate aim is to provide top quality solutions under one roof.</p>
+        <p>Quality and result-driven products are never accidental. It's the result of creating and capitalizing on opportunities. Our best technical experts create just that opportunity.</p>
+        <div class="about-feats">
+          <div class="feat-item"><i class="fa fa-check-circle"></i> Speed &amp; Security</div>
+          <div class="feat-item"><i class="fa fa-check-circle"></i> Flexibility &amp; Scalability</div>
+          <div class="feat-item"><i class="fa fa-check-circle"></i> Better Collaboration</div>
+          <div class="feat-item"><i class="fa fa-check-circle"></i> Trusted Tech Partner</div>
+        </div>
+        <a href="#services" class="btn-primary">Explore Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="centered">
+      <p class="section-tag">What We Offer</p>
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-sub">Crafting digital solutions that resonate with clients' unique industry landscape, requirements and preferences for optimal functionality.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card">
+        <div class="svc-icon"><i class="fa fa-mobile-alt"></i></div>
+        <h3>Mobile App Development</h3>
+        <p>Mobile app development with cutting-edge technologies for both Android and iOS platforms.</p>
+        <ul class="svc-list">
+          <li>Android App Development</li>
+          <li>iOS App Development</li>
+          <li>Cross-Platform Solutions</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon"><i class="fa fa-laptop-code"></i></div>
+        <h3>Custom Software Development</h3>
+        <p>Designing and creating applications for businesses of all sizes. Simplicity to complexity made easy.</p>
+        <ul class="svc-list">
+          <li>Customized development with precision</li>
+          <li>Tailored solutions for unique needs</li>
+          <li>Improved security &amp; credibility</li>
+          <li>Seamless third-party integration</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon"><i class="fa fa-cloud"></i></div>
+        <h3>SaaS Application Development</h3>
+        <p>Cloud expertise to build SaaS solutions with minimal infrastructure complexity and improved scalability.</p>
+        <ul class="svc-list">
+          <li>Minimal infrastructure complexity</li>
+          <li>Improved scalability</li>
+          <li>Reduced operational costs</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon"><i class="fa fa-headset"></i></div>
+        <h3>Comprehensive Customer Support</h3>
+        <p>Dedicated and comprehensive tech support every step of the way from development to post-launch success.</p>
+        <ul class="svc-list">
+          <li>24/7 Technical Support</li>
+          <li>Post-launch maintenance</li>
+          <li>Dedicated support team</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon"><i class="fa fa-database"></i></div>
+        <h3>ERP Solutions</h3>
+        <p>Comprehensive ERP modules designed for efficient financial, inventory, and operational management.</p>
+        <ul class="svc-list">
+          <li>Financial Management Module</li>
+          <li>Inventory Management</li>
+          <li>HR &amp; Payroll Management</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon"><i class="fa fa-plug"></i></div>
+        <h3>API &amp; Integration Services</h3>
+        <p>Seamless integration services connecting your business systems for streamlined operations.</p>
+        <ul class="svc-list">
+          <li>E-Commerce Integration</li>
+          <li>API to API Integration</li>
+          <li>Bank API Integration</li>
+        </ul>
+      </div>
+    </div>
+    <div class="svc-more">
+      <a href="#contact" class="btn-primary">Get a Free Consultation</a>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE / MODULES -->
+<section class="expertise" id="expertise">
+  <div class="container">
+    <div class="centered">
+      <p class="section-tag">Our Expertise</p>
+      <h2 class="section-title">Strategically Focused Areas</h2>
+      <p class="section-sub">Get ready to maximize your productivity with our industry-focused core modules and ERP plugins.</p>
+    </div>
+    <div class="expertise-grid">
+      <div class="exp-card">
+        <h3>Core Modules</h3>
+        <ul class="exp-list">
+          <li><i class="fa fa-circle"></i> Financial Management Module</li>
+          <li><i class="fa fa-circle"></i> Inventory Management Module</li>
+          <li><i class="fa fa-circle"></i> Supply Chain Management Module</li>
+          <li><i class="fa fa-circle"></i> Sales &amp; Order Management Module</li>
+          <li><i class="fa fa-circle"></i> Fixed Asset Management Module</li>
+          <li><i class="fa fa-circle"></i> Club Membership Management Module</li>
+          <li><i class="fa fa-circle"></i> Human Resource &amp; Payroll Management</li>
+          <li><i class="fa fa-circle"></i> Van Sales Module</li>
+        </ul>
+      </div>
+      <div class="exp-card">
+        <h3>ERP Plugins</h3>
+        <ul class="exp-list">
+          <li><i class="fa fa-circle"></i> E-Commerce Integration</li>
+          <li><i class="fa fa-circle"></i> API to API Integration</li>
+          <li><i class="fa fa-circle"></i> API Based Validations &amp; Triggers</li>
+          <li><i class="fa fa-circle"></i> Bank API Integration</li>
+          <li><i class="fa fa-circle"></i> Custom Development for Business</li>
+          <li><i class="fa fa-circle"></i> Data Extraction &amp; Analysis</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="container">
+    <h2>Ready to Maximize Your Productivity?</h2>
+    <p>Partner with Neoxis Solutions and unleash possibilities with the right software for your business.</p>
+    <a href="#contact" class="btn-primary">Get Started Today</a>
+  </div>
+</div>
+
+<section class="clients" id="clients">
+  <div class="container centered">
+    <p class="section-tag">Our Clients</p>
+    <h2 class="section-title">Trusted by Leading Businesses</h2>
+  </div>
+
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+
+      <!-- ORIGINAL LOGOS -->
+      <div class="client-logo">
+        <img src="src/images/Cli1.png" alt="Client 1 Logo">
+      </div>
+
+      <div class="client-logo">
+        <img src="src/images/Cli2.png" alt="Client 2 Logo">
+      </div>
+
+      <div class="client-logo">
+        <img src="src/images/Cli3.png" alt="Client 3 Logo">
+      </div>
+
+      <div class="client-logo">
+        <img src="src/images/Cli4.png" alt="Client 4 Logo">
+      </div>
+
+      <!-- DUPLICATES FOR SMOOTH LOOP -->
+      <div class="client-logo">
+        <img src="src/images/Cli1.png" alt="Client 1 Logo">
+      </div>
+
+      <div class="client-logo">
+        <img src="src/images/Cli2.png" alt="Client 2 Logo">
+      </div>
+
+      <div class="client-logo">
+        <img src="src/images/Cli3.png" alt="Client 3 Logo">
+      </div>
+
+      <div class="client-logo">
+        <img src="src/images/Cli4.png" alt="Client 4 Logo">
+      </div>
+            <div class="client-logo">
+        <img src="src/images/Cli1.png" alt="Client 1 Logo">
+      </div>
+
+      <div class="client-logo">
+        <img src="src/images/Cli2.png" alt="Client 2 Logo">
+      </div>
+
+      <div class="client-logo">
+        <img src="src/images/Cli3.png" alt="Client 3 Logo">
+      </div>
+
+      <div class="client-logo">
+        <img src="src/images/Cli4.png" alt="Client 4 Logo">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">Neo<span>xis</span></a>
+        <p>Communicate. Collaborate. Create. Neoxis Solutions is your trusted technology partner for IT Infrastructure development and innovative software solutions.</p>
+        <div class="footer-socials">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#expertise">Solutions</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="#services">Mobile App Dev</a></li>
+          <li><a href="#services">Custom Software</a></li>
+          <li><a href="#services">SaaS Solutions</a></li>
+          <li><a href="#services">ERP Modules</a></li>
+          <li><a href="#services">API Integration</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="contact-item"><i class="fa fa-map-marker-alt"></i><span>97/C Kottayam, Kerala, India</span></div>
+        <div class="contact-item"><i class="fa fa-phone-alt"></i><span>+91-7994195240</span></div>
+        <div class="contact-item"><i class="fa fa-envelope"></i><span>info@neoxissolutions.com</span></div>
+        <h4 style="margin-top:20px">Newsletter</h4>
+        <div class="newsletter">
+          <input type="email" placeholder="Your email address" />
+          <button>Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2018–2025 by Neoxis Solutions. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- SCROLL TO TOP -->
+<a href="#home" id="stt"><i class="fa fa-chevron-up"></i></a>
+
+<script>
+  // Slider
+  let cur = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const slidesWrapper = document.getElementById('slides');
+  let timer = setInterval(() => changeSlide(1), 5000);
+
+  function goSlide(n) {
+    slides[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    cur = n;
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('active');
+    slidesWrapper.style.transform = `translateX(-${cur * 100}%)`;
+    clearInterval(timer);
+    timer = setInterval(() => changeSlide(1), 5000);
+  }
+  function changeSlide(dir) {
+    goSlide((cur + dir + slides.length) % slides.length);
+  }
+
+  // Scroll to top
+  const stt = document.getElementById('stt');
+  window.addEventListener('scroll', () => {
+    stt.classList.toggle('show', window.scrollY > 400);
+  });
+</script>
+</body>
+</html>
