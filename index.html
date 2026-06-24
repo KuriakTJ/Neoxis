@@ -681,6 +681,32 @@
     transition: background .25s;
   }
   .newsletter button:hover { background: #c73040; }
+  .office-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    transition: background .25s, border-color .25s;
+  }
+  .office-card:hover { background: rgba(255,255,255,.09); border-color: rgba(245,166,35,.3); }
+  .office-flag { font-size: 1.6rem; line-height: 1; flex-shrink: 0; }
+  .office-info { display: flex; flex-direction: column; gap: 2px; }
+  .office-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent2);
+  }
+  .office-address { font-size: 0.87rem; color: rgba(255,255,255,.8); font-weight: 500; }
+  .office-phone { font-size: 0.82rem; color: rgba(255,255,255,.5); }
+  .office-phone i { margin-right: 5px; color: var(--accent2); font-size: 0.75rem; }
+
   .footer-bottom {
     border-top: 1px solid rgba(255,255,255,.07);
     padding: 20px 0;
@@ -1096,9 +1122,21 @@
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
-        <div class="contact-item"><i class="fa fa-map-marker-alt"></i><span>97/C Kottayam, Kerala, India</span></div>
-        <div class="contact-item"><i class="fa fa-phone-alt"></i><span>+91-7994195240</span></div>
-        <div class="contact-item"><i class="fa fa-envelope"></i><span>info@neoxissolutions.com</span></div>
+        <div class="office-card">
+          <div class="office-info">
+            <span class="office-label">Oman</span>
+            <span class="office-address">Muscat, Oman</span>
+            <span class="office-phone"><i class="fa fa-phone-alt"></i> +968 9192 3181</span>
+          </div>
+        </div>
+        <div class="office-card">
+          <div class="office-info">
+            <span class="office-label">India</span>
+            <span class="office-address">Kanjirapally, Kerala</span>
+            <span class="office-phone"><i class="fa fa-phone-alt"></i> +91 7994195240</span>
+          </div>
+        </div>
+        <div class="contact-item" style="margin-top:6px"><i class="fa fa-envelope"></i><span>info@neoxissolutions.com</span></div>
         <h4 style="margin-top:20px">Newsletter</h4>
         <div class="newsletter">
           <input type="email" placeholder="Your email address" />
@@ -1108,7 +1146,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2018–2025 by Neoxis Solutions. All rights reserved.</p>
+    <p>© 2018–2026 by Neoxis Solutions. All rights reserved.</p>
   </div>
 </footer>
 
